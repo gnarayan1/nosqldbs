@@ -1,0 +1,19 @@
+mongo mongodb_host/models
+
+show dbs
+use models
+show collections
+db.getCollection('capture').find({})
+
+
+db.getCollection('capture').find({"captureType" : "import"})
+db.getCollection('capture').find({"captureTime" : ISODate("2016-04-06T00:27:43.699Z")})
+
+
+db.getCollection('capture').find( { "captureType" : "import", "captureTime": { $gt: ISODate("2016-08-11T00:00:00.000Z"), $lt: ISODate("2016-08-12T00:00:00.000Z") } } ).count()
+db.getCollection('capture').find( { "captureType" : "import", "captureTime": { $gt: ISODate("2016-08-11T00:00:00.000Z"), $lt: ISODate("2016-08-12T00:00:00.000Z") } } )
+
+// Schema less
+db.claims.insert( { submitterId: "123", providerName: "Dr. Abc", "totalCharges" : 1000.00 } )
+db.claims.insert( { submitterId: "456", providerName: "Dr. Xyz", "totalCharges" : 2000.00, "providerMetroArea": "Xyz" } )
+db.getCollection('claims').find({submitterId: "123"})

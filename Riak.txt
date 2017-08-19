@@ -1,0 +1,28 @@
+cd ~/riak-2.2.3/rel
+
+
+sudo ./riak1/bin/riak start
+sudo ./riak1/bin/riak-admin status | grep ring
+
+
+sudo ./riak1/bin/riak start
+sudo ./riak2/bin/riak-admin status | grep ring
+
+sudo ./riak2/bin/riak-admin cluster join riak1@127.0.0.1
+
+sudo ./riak3/bin/riak start
+sudo ./riak3/bin/riak-admin cluster join riak1@127.0.0.1
+
+sudo ./riak3/bin/riak-admin status|grep ring_members
+
+
+sudo ./riak1/bin/riak-admin bucket-type create users '{"props":{"n_val":3}}'
+sudo ./riak1/bin/riak-admin bucket-type activate users
+
+curl -XGET   -H "Content-Type: text/plain"     http://localhost:8098/types/users/props
+
+curl -XPUT   -H "Content-Type: text/plain"   -d "joe.smith@blabla.com"   http://localhost:8098/types/users/buckets/user/keys/joe.smith?w=3
+
+curl -XGET   -H "Content-Type: text/plain"   http://localhost:8098/types/users/buckets/user/keys/joe.smith?r=1
+
+

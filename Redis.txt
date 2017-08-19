@@ -1,0 +1,35 @@
+
+redis-cli -h redis-host.example.com
+
+flushall
+
+Key-Value
+set modeler.db.readers 4
+get modeler.db.readers
+
+set current.model.id 100
+incr current.model.id
+
+mset modeler.db.readers 4 modeler.db.writers 16 modeler.itemsPerChunk 300
+mget modeler.db.readers modeler.db.writers modeler.itemsPerChunk
+
+set claim.calculate.10001 “{\“claimNum\”: 10001, \“totalCharges\” :  1000.00}” ex 10
+get claim.calculate.10001
+
+
+List
+rpush service.categories.run.ids 1 2 3 4 5
+rpush service.categories.run.ids 6
+lrange service.categories.run.ids 0 -1
+rpop service.categories.run.ids
+lrange service.categories.run.ids 0 -1
+del service.categories.run.ids
+
+Map
+hmset user.joe firstname Joe lastname Smith email Joe.Smith@blabla.com
+hgetall user.joe
+hget user.joe email
+
+
+Sets, SortedSets, BitMaps, HyperLogLogs, Pub-Sub
+

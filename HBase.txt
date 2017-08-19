@@ -1,0 +1,19 @@
+hbase shell
+
+list
+
+
+desc 'Contacts'
+
+count 'Contacts'
+
+scan 'Contacts'
+
+
+get 'Contacts',4868
+
+
+get 'Contacts',4868, 'Personal:Name'
+
+
+scan 'Contacts', { COLUMNS => 'Office:Address', LIMIT => 10, FILTER => "ValueFilter( =, 'binaryprefix:3148 Rose Street' )" }
