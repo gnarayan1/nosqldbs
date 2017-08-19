@@ -1,6 +1,4 @@
 # nosqldbs
-# nosqldbs
-
 
 ## What's NoSQL
 
